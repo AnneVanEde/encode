@@ -1,0 +1,5 @@
+ENCODETool/Graphs/*
+ENCODETool/bin/*
+ENCODETool/obj/*
+ENCODETool/.vs
+ENCODETool/*.sln
