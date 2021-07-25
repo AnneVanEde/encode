@@ -10,4 +10,4 @@ The output design is shown in two ways. First you can compare the original class
 
 ENCODE was created as part of my Master Thesis. While I am proud of the result, it is far from finished. If you input a project with large classes and methods, you will get a bad design and large designs create problems for the visualization.
 
-As part of my thesis, I interviewed some people and gather information on ECS and designing for ECS. The results of this interview and some more in-depth explanation on ENCODE can be found in the [Accompanying Thesis](https://github.com/AnneVanEde/ms_thesis).
+As part of my thesis, I interviewed some people and gather information on ECS and designing for ECS. The results of this interview and some more in-depth explanation on ENCODE can be found in the [Accompanying Thesis](https://github.com/AnneVanEde/MasterThesis).
