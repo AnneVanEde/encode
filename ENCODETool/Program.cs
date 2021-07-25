@@ -34,8 +34,6 @@ namespace ENCODE.Base
             // Create default planning profile
             planProfile = new CurrentPlanProfile();
 
-            projectPath = @"C:\Users\avanede\Documents\DOTS-training-samples-master\Original\AntPhermones\Assembly-CSharp.csproj";
-
             // Create Window
             OpenMainWindow();
 
