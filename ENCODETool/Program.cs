@@ -83,7 +83,7 @@ namespace ENCODE.Base
             menuForm.UpdateTotalProgressBar(10);
 
             // Parse, Link, Connect the project
-            menuForm.UpdateStepLabel("DOC Code Analysis...");
+            menuForm.UpdateStepLabel("ENCODE Code Analysis...");
             ParseProject();
             menuForm.UpdateStepProgressBar(33);
 
@@ -262,7 +262,7 @@ namespace ENCODE.Base
 
             if (GenerateKey(inputType, inputParameter, out string key) && projectStructure.oodRawDictionary.TryGetValue(key, out indexTuple))
             {
-                return projectStructure.DOCListGetItem(indexTuple, out oodItem) == 1;
+                return projectStructure.ListGetItem(indexTuple, out oodItem) == 1;
             }
 
             return false;
@@ -285,7 +285,7 @@ namespace ENCODE.Base
                 case nameof(Types.ClassGroup):
                     if (nameTag.Length > 1 &&
                         projectStructure.oodRawDictionary.TryGetValue($"{Types.Class}_{nameTag[0]}_{nameTag[1]}", out IndexTuple indexTuple) &&
-                        projectStructure.DOCListGetItem(indexTuple, out OODItem oodItem) == 1)
+                        projectStructure.ListGetItem(indexTuple, out OODItem oodItem) == 1)
                     {
                         key = $"{Types.ClassGroup}_{oodItem.GetKey()}";
                         return true;
@@ -309,31 +309,31 @@ namespace ENCODE.Base
             {
                 case nameof(Types.Namespace):
                     indexTuple = new IndexTuple((int)Types.Namespace, inputParameter);
-                    return projectStructure.DOCListGetItem(indexTuple, out oodItem) == 1;
+                    return projectStructure.ListGetItem(indexTuple, out oodItem) == 1;
                 case nameof(Types.Class):
                     indexTuple = new IndexTuple((int)Types.Class, inputParameter);
-                    return projectStructure.DOCListGetItem(indexTuple, out oodItem) == 1;
+                    return projectStructure.ListGetItem(indexTuple, out oodItem) == 1;
                 case nameof(Types.Method):
                     indexTuple = new IndexTuple((int)Types.Method, inputParameter);
-                    return projectStructure.DOCListGetItem(indexTuple, out oodItem) == 1;
+                    return projectStructure.ListGetItem(indexTuple, out oodItem) == 1;
                 case nameof(Types.ClassGroup):
                     indexTuple = new IndexTuple((int)Types.ClassGroup, inputParameter);
-                    return projectStructure.DOCListGetItem(indexTuple, out oodItem) == 1;
+                    return projectStructure.ListGetItem(indexTuple, out oodItem) == 1;
                 case nameof(Types.MethodGroup):
                     indexTuple = new IndexTuple((int)Types.MethodGroup, inputParameter);
-                    return projectStructure.DOCListGetItem(indexTuple, out oodItem) == 1;
+                    return projectStructure.ListGetItem(indexTuple, out oodItem) == 1;
                 case nameof(Types.Component):
                     indexTuple = new IndexTuple((int)Types.Component, inputParameter);
-                    return projectStructure.DOCListGetItem(indexTuple, out ecsIem) == 1;
+                    return projectStructure.ListGetItem(indexTuple, out ecsIem) == 1;
                 case nameof(Types.ComponentMember):
                     indexTuple = new IndexTuple((int)Types.ComponentMember, inputParameter);
-                    return projectStructure.DOCListGetItem(indexTuple, out ecsIem) == 1;
+                    return projectStructure.ListGetItem(indexTuple, out ecsIem) == 1;
                 case nameof(Types.System):
                     indexTuple = new IndexTuple((int)Types.System, inputParameter);
-                    return projectStructure.DOCListGetItem(indexTuple, out ecsIem) == 1;
+                    return projectStructure.ListGetItem(indexTuple, out ecsIem) == 1;
                 case nameof(Types.Entity):
                     indexTuple = new IndexTuple((int)Types.Entity, inputParameter);
-                    return projectStructure.DOCListGetItem(indexTuple, out ecsIem) == 1;
+                    return projectStructure.ListGetItem(indexTuple, out ecsIem) == 1;
                 default:
                     indexTuple = new IndexTuple();
                     return false;
@@ -582,9 +582,7 @@ namespace ENCODE.Base
 
             if (indexTuple.arrayIndex == (int)Types.Namespace || indexTuple.arrayIndex == (int)Types.Class)
             {
-                //TreeWalker.PrintDOCFileStructure(projectStructure, indexTuple, new IndexTuple(-1, -1), 0);
-
-                projectStructure.DOCListGetItem(indexTuple, out OODItem oodItem);
+                projectStructure.ListGetItem(indexTuple, out OODItem oodItem);
                 TreeWalker.DebugItem(oodItem, 0);
             }
             else if (indexTuple.arrayIndex == (int)Types.ClassGroup || indexTuple.arrayIndex == (int)Types.MethodGroup)
@@ -606,8 +604,6 @@ namespace ENCODE.Base
             {
                 TreeWalker.PrintDocItem(projectStructure, indexTuple, new IndexTuple(-1, -1), 0);
 
-                //projectStructure.DOCListGetItem(indexTuple, out DOCItem oodItem);
-                //TreeWalker.DebugItem(oodItem, 0);
             }
             else if (indexTuple.arrayIndex == (int)Types.ClassGroup || indexTuple.arrayIndex == (int)Types.MethodGroup)
             {
@@ -619,22 +615,10 @@ namespace ENCODE.Base
             }
             else if (indexTuple.arrayIndex == (int)Types.System)
             {
-                TreeWalker.PrintSystem(projectStructure, indexTuple, 0);
+                //TreeWalker.PrintSystem(projectStructure, indexTuple, 0);
             }
 
         }
-
-        //private static void PrintTree(int treeNumber, bool printRaw)
-        //{
-        //    SyntaxTree tree = compilation.SyntaxTrees.ElementAt(treeNumber);
-        //
-        //    Logger.WriteLine(TreeWalker.FindClassName(tree));
-        //
-        //    if (printRaw)
-        //        TreeWalker.PrintRawItem(projectStructure.oodFiles[treeNumber], 0);
-        //    else
-        //        TreeWalker.PrintDOCFileStructure(projectStructure, new IndexTuple((int)ArrayIndex.DOCFile, treeNumber), new IndexTuple(-1, -1), 0);
-        //}
 
         #endregion
     }

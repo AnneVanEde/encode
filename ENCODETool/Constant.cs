@@ -9,7 +9,7 @@ namespace ENCODE.Base
 
     public static class Constant
     {
-        public const string LOG_FILE_PATH = @"DOCLogFile.txt";
+        public const string LOG_FILE_PATH = @"ENCODELogFile.txt";
 
         public const int PREFERRED_VSI = 1;
         public const bool DEBUG_OUTPUT = false;

@@ -26,7 +26,7 @@ namespace ENCODE.Base
 
         public static void PrintDocItem(Project project, IndexTuple indexTuple, IndexTuple parentIndexTuple, int depth)
         {
-            int parentIndex = project.DOCListGetItem(indexTuple, parentIndexTuple, out OODItem oodItem);
+            int parentIndex = project.ListGetItem(indexTuple, parentIndexTuple, out OODItem oodItem);
             if (oodItem == null || (oodItem.type == Types.File.ToString() && parentIndex == -1))
                 return;
 
@@ -46,7 +46,7 @@ namespace ENCODE.Base
             if (project.GroupListGetItems(indexTuple, out List<IndexTuple> groupMembers) != 1)
                 return;
 
-            project.DOCListGetItem(groupMembers[0], out OODItem oodParent);
+            project.ListGetItem(groupMembers[0], out OODItem oodParent);
             PrintLine(oodParent.GetLabel(), depth);
 
             depth++;
@@ -54,7 +54,7 @@ namespace ENCODE.Base
             // Add Children Recursively
             for (int i = 1; i < groupMembers.Count; i++)
             {
-                project.DOCListGetItem(groupMembers[i], out OODItem oodChild);
+                project.ListGetItem(groupMembers[i], out OODItem oodChild);
                 PrintLine(oodChild.GetLabel(), depth);
             }
 
@@ -66,7 +66,7 @@ namespace ENCODE.Base
 
         public static void PrintComponent(Project project, IndexTuple indexTuple, int depth)
         {
-            if (project.DOCListGetItem(indexTuple, out ECSItem ecsItem) != 1)
+            if (project.ListGetItem(indexTuple, out ECSItem ecsItem) != 1)
                 return;
 
             ECSComponent ecsComponent = (ECSComponent)ecsItem;
@@ -77,58 +77,12 @@ namespace ENCODE.Base
             // Add Children Recursively
             for (int i = 0; i < ecsComponent.ecsComponentFields.Count; i++)
             {
-                project.DOCListGetItem(ecsComponent.ecsComponentFields[i], out ECSItem oodChild);
+                project.ListGetItem(ecsComponent.ecsComponentFields[i], out ECSItem oodChild);
                 PrintLine(oodChild.GetLabel(), depth);
             }
 
         }
 
-        public static void PrintSystem(Project project, IndexTuple indexTuple, int depth)
-        {
-            //if (project.DOCListGetItem(indexTuple, out ECSItem ecsItem) != 1)
-            //    return;
-            //
-            //ECSSystem ecsSystem = (ECSSystem)ecsItem;
-            //PrintLine(ecsSystem.GetLabel(), depth);
-            //
-            //depth++;
-            //
-            //PrintLine("Write:", depth);
-            //// Add Children Recursively
-            //for (int i = 0; i < ecsSystem.ecsWriteComponents.Count; i++)
-            //{
-            //    //PrintComponent(project, ecsSystem.ecsWriteComponents[i], depth);
-            //    PrintLine($"Component {ecsSystem.ecsWriteComponents[i].itemIndex}", depth);
-            //
-            //    project.DOCListGetItem(ecsSystem.ecsWriteComponents[i], out ECSItem oodChild);
-            //    ECSComponent ecsComponent = (ECSComponent)oodChild;
-            //
-            //    // Add Children Recursively
-            //    for (int j = 0; j < ecsComponent.ecsComponentFields.Count; j++)
-            //    {
-            //        project.DOCListGetItem(ecsComponent.ecsComponentFields[j], out oodChild);
-            //        PrintLine(oodChild.GetLabel(), depth);
-            //    }
-            //}
-            //
-            //PrintLine("Read:", depth);
-            //// Add Children Recursively
-            //for (int i = 0; i < ecsSystem.ecsReadComponents.Count; i++)
-            //{
-            //    //PrintComponent(project, ecsSystem.ecsReadComponents[i], depth);
-            //    PrintLine($"Component {ecsSystem.ecsReadComponents[i].itemIndex}", depth);
-            //
-            //    project.DOCListGetItem(ecsSystem.ecsReadComponents[i], out ECSItem oodChild);
-            //    ECSComponent ecsComponent = (ECSComponent)oodChild;
-            //
-            //    // Add Children Recursively
-            //    for (int j = 0; j < ecsComponent.ecsComponentFields.Count; j++)
-            //    {
-            //        project.DOCListGetItem(ecsComponent.ecsComponentFields[j], out oodChild);
-            //        PrintLine(oodChild.GetLabel(), depth);
-            //    }
-            //}
-        }
 
         #endregion
 

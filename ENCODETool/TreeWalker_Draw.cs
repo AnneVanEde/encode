@@ -20,6 +20,8 @@ namespace ENCODE.Base
 
     static partial class TreeWalker
     {
+        #region Components
+
         public static List<List<QueryResult>> DrawComponent(IndexTuple indexTuple, Project project)
         {
             bool enabled = true;
@@ -38,6 +40,10 @@ namespace ENCODE.Base
             return new List<List<QueryResult>>() { new List<QueryResult>() { header, component } };
 
         }
+
+        #endregion
+
+        #region Entities
 
         public static List<List<QueryResult>> DrawEntity(IndexTuple indexTuple, Project project)
         {
@@ -99,10 +105,11 @@ namespace ENCODE.Base
 
             columnRow.Add(column);
             return columnRow;
-
-            // gather systems
         }
 
+        #endregion
+
+        #region Systems
 
         public static List<List<QueryResult>> DrawSystem(IndexTuple indexTuple, Project project)
         {
@@ -137,6 +144,48 @@ namespace ENCODE.Base
             columnRow.Add(column);
             return columnRow;
         }
+
+
+        public static List<List<QueryResult>> DrawSystemGrid(IndexTuple indexTuple, Project project)
+        {
+            List<List<QueryResult>> columnRow = new List<List<QueryResult>>();
+
+            List<QueryResult> column = new List<QueryResult>();
+            ECSSystem system = project.ecsSystems[indexTuple.itemIndex];
+            bool enabled = true;
+            string accessType;
+
+            // Get Entity name
+            column.Add(new QueryResult(indexTuple, $"Entity {indexTuple.itemIndex}: {system.variableName}", new List<string>(), enabled));
+
+            // gather components
+            for (int compIndex = 0; compIndex < project.ecsComponents.Count; compIndex++)
+            {
+                IndexTuple componentIndex = new IndexTuple((int)Types.Component, compIndex);
+                List<string> value = new List<string>();
+
+                enabled = system.ecsReadComponents.Contains(componentIndex) || system.ecsWriteComponents.Contains(componentIndex);
+
+                accessType = "";
+                accessType += system.ecsReadComponents.Contains(componentIndex) ? "-" : "";
+                accessType += system.ecsWriteComponents.Contains(componentIndex) ? "+" : "";
+
+                ECSComponent component = project.ecsComponents[componentIndex.itemIndex];
+                foreach (IndexTuple fieldIndex in component.ecsComponentFields)
+                {
+                    value.Add(project.ecsComponentFields[fieldIndex.itemIndex].GetLabel());
+                }
+                column.Add(new QueryResult(componentIndex, $"{accessType} Component {componentIndex.itemIndex}", value, enabled));
+            }
+
+
+            columnRow.Add(column);
+            return columnRow;
+        }
+
+        #endregion
+
+        #region Classes
 
         public static List<List<QueryResult>> DrawClass(IndexTuple indexTuple, Project project)
         {
@@ -186,6 +235,10 @@ namespace ENCODE.Base
             // gather systems
         }
 
+        #endregion
+
+        #region Methods
+
         public static List<List<QueryResult>> DrawMethod(IndexTuple indexTuple, Project project)
         {
             List<List<QueryResult>> columnRow = new List<List<QueryResult>>();
@@ -218,6 +271,7 @@ namespace ENCODE.Base
             return columnRow;
         }
 
+        #endregion
 
     }
 }

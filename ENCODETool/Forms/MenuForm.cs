@@ -1042,7 +1042,9 @@ namespace ENCODE.Base
             staThread.Start();
             staThread.Join();
 
-            project_cmb.Text = Program.projectPath;
+            project_cmb.Text = "Hello";// Program.projectPath;
+            project_cmb.Items.Add(Program.projectPath);
+            project_cmb.SelectedItem = Program.projectPath;
         }
 
         private void SearchProjectFile()
@@ -1533,7 +1535,7 @@ namespace ENCODE.Base
 
                     for (int entityIndex = 0; entityIndex < Program.projectStructure.ecsSystems.Count; entityIndex++)
                     {
-                        resultQuery.AddRange(TreeWalker.DrawSystem(new IndexTuple(typeIndex, entityIndex), Program.projectStructure));
+                        resultQuery.AddRange(TreeWalker.DrawSystemGrid(new IndexTuple(typeIndex, entityIndex), Program.projectStructure));
                     }
 
                     return resultQuery;
@@ -1742,7 +1744,6 @@ namespace ENCODE.Base
                 saveFileDialog.Filter = "Jpeg Image|*.jpg";
                 saveFileDialog.Title = "Save an Image File";
                 saveFileDialog.FileName = baseName;
-                saveFileDialog.InitialDirectory = $@"D:\Plastic\XVR.one\XVR.DOCAnalysisTool\Graphs\{folder}";
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {

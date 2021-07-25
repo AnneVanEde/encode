@@ -91,7 +91,7 @@ namespace ENCODE.Base
 
 
         /// <summary>
-        /// Link DOCItems together. 
+        /// Link OODItems together. 
         /// </summary>
         /// <param name="oodItem"></param>
         /// <param name="project"></param>
@@ -157,7 +157,7 @@ namespace ENCODE.Base
                 // TODO: 'If' because otherwise it breaks on structs
                 if (parentIndex.arrayIndex == (int)Types.Class)
                 {
-                    project.DOCListGetItem(parentIndex, out OODItem classItem);
+                    project.ListGetItem(parentIndex, out OODItem classItem);
                     baseClassIndex = !(((OODClass)classItem).baseClassIndex is null) ? ((OODClass)classItem).baseClassIndex : new IndexTuple();
                 }
 

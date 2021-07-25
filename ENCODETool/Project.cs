@@ -84,7 +84,7 @@ namespace ENCODE.Base
 
             if (oodRawDictionary.TryGetValue(oodItem.GetKey(), out IndexTuple indexTuple))
             {
-                DOCListGetItem(indexTuple, out OODItem oodExistingItem);
+                ListGetItem(indexTuple, out OODItem oodExistingItem);
                 oodExistingItem.AddDataFrom(oodItem, parentIndex);
                 return indexTuple;
             }
@@ -106,7 +106,7 @@ namespace ENCODE.Base
 
             if (oodRawDictionary.TryGetValue(oodItem.GetKey(), out IndexTuple indexTuple))
             {
-                DOCListGetItem(indexTuple, out OODItem oodExistingItem);
+                ListGetItem(indexTuple, out OODItem oodExistingItem);
                 ((OODClass)oodExistingItem).AddDataFrom(oodItem, parentIndex);
                 return indexTuple;
             }
@@ -132,7 +132,7 @@ namespace ENCODE.Base
 
             if (oodRawDictionary.TryGetValue(oodItem.GetKey(), out IndexTuple indexTuple))
             {
-                DOCListGetItem(indexTuple, out OODItem oodExistingItem);
+                ListGetItem(indexTuple, out OODItem oodExistingItem);
                 ((OODMethod)oodExistingItem).AddDataFrom(oodItem, parentIndex);
                 return indexTuple;
             }
@@ -178,7 +178,7 @@ namespace ENCODE.Base
 
             if (oodRawDictionary.TryGetValue(oodItem.GetKey(), out IndexTuple indexTuple))
             {
-                DOCListGetItem(indexTuple, out OODItem oodExistingItem);
+                ListGetItem(indexTuple, out OODItem oodExistingItem);
                 oodExistingItem.AddDataFrom(oodItem, parentIndex);
                 return indexTuple;
             }
@@ -198,7 +198,7 @@ namespace ENCODE.Base
         {
             if (ecsRawDictionary.TryGetValue(ecsComponentField.GetKey(), out IndexTuple indexTuple))
             {
-                DOCListGetItem(indexTuple, out ECSItem ecsExistingItem);
+                ListGetItem(indexTuple, out ECSItem ecsExistingItem);
                 ((ECSComponentField)ecsExistingItem).AddDataFrom(ecsComponentField);
                 return indexTuple;
             }
@@ -625,7 +625,7 @@ namespace ENCODE.Base
         #endregion
 
         #region Getters
-        public int DOCListGetItem(IndexTuple indexTuple, out OODItem oodItem)
+        public int ListGetItem(IndexTuple indexTuple, out OODItem oodItem)
         {
             oodItem = null;
 
@@ -687,7 +687,7 @@ namespace ENCODE.Base
             return -1;
         }
 
-        public int DOCListGetItem(IndexTuple indexTuple, out ECSItem ecsItem)
+        public int ListGetItem(IndexTuple indexTuple, out ECSItem ecsItem)
         {
             ecsItem = null;
 
@@ -728,7 +728,7 @@ namespace ENCODE.Base
             return -1;
         }
 
-        public int DOCListGetItem(IndexTuple indexTuple, IndexTuple parentIndexTuple, out OODItem oodItem)
+        public int ListGetItem(IndexTuple indexTuple, IndexTuple parentIndexTuple, out OODItem oodItem)
         {
             oodItem = null;
 
@@ -891,18 +891,7 @@ namespace ENCODE.Base
         {
             switch (indexTuple.arrayIndex)
             {
-                //case (int)ArrayIndex.DOCFile:
-                //    if (indexTuple.itemIndex >= 0 && indexTuple.itemIndex < oodFiles.Count())
-                //    {
-                //        return oodFiles[indexTuple.itemIndex].GetParentLabel();
-                //    }
-                //    break;
-                //case (int)ArrayIndex.DOCNamespace:
-                //    if (indexTuple.itemIndex >= 0 && indexTuple.itemIndex < oodNamespaces.Count())
-                //    {
-                //        return oodNamespaces[indexTuple.itemIndex].name;
-                //    }
-                //    break;
+
                 case (int)Types.Class:
                     if (indexTuple.itemIndex >= 0 && indexTuple.itemIndex < oodClasses.Count())
                     {
@@ -927,12 +916,6 @@ namespace ENCODE.Base
                         return oodMembers[indexTuple.itemIndex].namespaceName;
                     }
                     break;
-                    //case (int)ArrayIndex.ECSSystem:
-                    //    if (indexTuple.itemIndex >= 0 && indexTuple.itemIndex < ecsSystems.Count())
-                    //    {
-                    //        return ecsSystems[indexTuple.itemIndex].GetLabel();
-                    //    }
-                    //    break;
             }
 
             return "";
