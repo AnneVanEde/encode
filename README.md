@@ -8,6 +8,6 @@ ENCODE, and the techniques it uses are based around these two ideas: what classe
 
 The output design is shown in two ways. First you can compare the original classes and methods with the entities and systems to see if everything is converted properly. Secondly, you can view the whole design to find commonalities between systems and entities.
 
-ENCODE was created as part of my Master Thesis. While I am proud of the result, it is far from finished. If you input a project with large classes and methods, you will get a bad design. 
+ENCODE was created as part of my Master Thesis. While I am proud of the result, it is far from finished. If you input a project with large classes and methods, you will get a bad design and large designs create problems for the visualization.
 
 As part of my thesis, I interviewed some people and gather information on ECS and designing for ECS. The results of this interview and some more in-depth explanation on ENCODE can be found in the [Accompanying Thesis](https://github.com/AnneVanEde/ms_thesis).
